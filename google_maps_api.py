@@ -2,7 +2,7 @@ import requests
 import os
 from typing import Dict, Any
 
-def sort_locations(data, min_rating=4.0, min_total_ratings=200):
+def sort_locations(data, min_rating=3.5, min_total_ratings=200):
     # Filter locations with rating above min_rating and valid total ratings
     filtered_locations = {
         name: info for name, info in data.items() 
@@ -23,9 +23,10 @@ def sort_locations(data, min_rating=4.0, min_total_ratings=200):
 
 
 class GoogleMapsVisitorRetriever:
-    def __init__(self, api_key: str):
+    def __init__(self, api_key: str, top_k = 5):
         self.api_key = api_key
         self.base_url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+        self.top_k = top_k
 
     def get_place_details(self, place_name: str, location: Dict[str, float]) -> Dict[str, Any]:
         """
