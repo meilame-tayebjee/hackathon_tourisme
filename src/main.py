@@ -2,9 +2,9 @@ import os
 import overpy
 import argparse
 
-from overpass_api_request import queryOverpassAPI
-from google_maps_api import GoogleMapsVisitorRetriever
-from route_optimizer import optimize_route
+from .overpass_api_request import queryOverpassAPI
+from .google_maps_api import GoogleMapsVisitorRetriever
+from .route_optimizer import optimize_route
 
 def launch(api_key, start_lat, start_lon, radius=20, top_k=5):
 
@@ -18,6 +18,8 @@ def launch(api_key, start_lat, start_lon, radius=20, top_k=5):
 
     visitor_frequencies.append(('start', {'latitude':start_lat, 'longitude':start_lon, 
     'rating':None, 'total_ratings':None, 'address':None, 'distance_till_next':None}))
+
+    print(visitor_frequencies)
 
     final_route = optimize_route(visitor_frequencies)
 
